@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政策與須知 - GO HEALTH</title>
+    <style>
+        :root {
+            --bg-color: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --border-color: #E5E7EB;
+            --primary-color: #10B981; /* 綠色點綴 */
+            --header-bg: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 頂部導覽列 */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 56px;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* 視圖切換容器 */
+        .view-container {
+            display: none;
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .view-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 首頁選單樣式 */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .menu-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: background-color 0.2s;
+        }
+
+        .menu-item:active {
+            background-color: #F3F4F6;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            margin-right: 16px;
+        }
+
+        .menu-title {
+            font-size: 16px;
+            font-weight: 600;
+            flex-grow: 1;
+        }
+
+        .menu-arrow {
+            color: #D1D5DB;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* 條款內容樣式 */
+        .doc-content {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+        }
+
+        .doc-content h2 {
+            font-size: 18px;
+            color: var(--text-main);
+            margin-top: 24px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .doc-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .doc-content p {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #374151;
+        }
+
+        .doc-content ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .doc-content li {
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #374151;
+        }
+        
+        .doc-content strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <button class="back-btn" id="btn-back" style="display: none;">〈 返回</button>
+        <h1 id="header-title">政策與須知</h1>
+    </header>
+
+    <main id="view-home" class="view-container active">
+        <div class="menu-list">
+            <div class="menu-item" onclick="switchView('view-tos', '授權與服務條款')">
+                <span class="menu-icon">📜</span>
+                <span class="menu-title">授權與服務條款</span>
+                <span class="menu-arrow">〉</span>
+            </div>
+            <div class="menu-item" onclick="switchView('view-points', '健康點使用說明')">
+                <span class="menu-icon">💰</span>
+                <span class="menu-title">健康點使用說明</span>
+                <span class="menu-arrow">〉</span>
+            </div>
+            <div class="menu-item" onclick="switchView('view-lottery', '群組抽獎規則')">
+                <span class="menu-icon">🎟️</span>
+                <span class="menu-title">群組抽獎規則</span>
+                <span class="menu-arrow">〉</span>
+            </div>
+        </div>
+    </main>
+
+    <main id="view-tos" class="view-container">
+        <div class="doc-content">
+            <p><strong>歡迎使用 GO HEALTH</strong><br>本服務是由鼎鼎聯合行銷股份有限公司（以下簡稱本公司）所提供的 HAPPY GO APP 延伸服務。當您開始使用本服務時，即視為您已充分閱讀、瞭解並同意以下條款內容。如您為未成年人，請務必由家長或監護人陪同閱讀並同意後再使用。</p>
+            
+            <h2>一、 個人資料的蒐集與授權使用</h2>
+            <p>為了讓您能參與健康任務並與家人互動，我們將在安全範圍內使用您的資料：</p>
+            <ul>
+                <li><strong>基礎資料匯入：</strong>您同意授權本服務從您的 HAPPY GO 帳號自動匯入姓名、性別、出生年月日，作為身分識別與任務配發之用。</li>
+                <li><strong>服務紀錄蒐集：</strong>我們將記錄您參與的問卷調查（包含個人興趣貼標）、遊戲互動資料、健康任務達成情形及裝置資訊，以優化個人化體驗與統計分析。</li>
+                <li><strong>資料保護權利：</strong>您可以隨時透過 HAPPY GO 官網或 APP 客服要求查詢、閱覽或刪除您的個人資料。</li>
+            </ul>
+
+            <h2>二、 健康點數與「雙軌積分」機制</h2>
+            <p>本服務採取「個人點數」與「群組積分」同步計算之雙軌制度：</p>
+            <ul>
+                <li><strong>個人點數：</strong>您完成健康任務所獲得的點數歸個人所有。</li>
+                <li><strong>群組積分：</strong>若您加入「家庭群組」，系統會同步將您獲得的點數計入該群組的總積分中，用於換取抽獎券。</li>
+                <li><strong>積分隨人走：</strong>您可自由加入或退出群組。當您退出群組時，您當週所貢獻的積分將隨您的帳號移出，原群組積分將即時扣除；當您加入新群組時，該積分將重新帶入新群組計算。</li>
+            </ul>
+
+            <h2>三、 家庭群組互動規範</h2>
+            <p>為維護友善的群組環境，使用者應遵守以下守則：</p>
+            <ul>
+                <li><strong>禁止不當內容：</strong>嚴禁發送涉及暴力、歧視、騷擾、性暗示或使他人感到困擾的訊息。</li>
+                <li><strong>嚴禁詐騙行為：</strong>禁止偽裝他人身分或散布不實資訊，不得以不當手段蒐集其他成員的個資。</li>
+                <li><strong>系統停權：</strong>若本公司判定您有違反本條款或影響服務運作之虞，得在不事先通知的情形下暫停您的服務權限。</li>
+            </ul>
+
+            <h2>四、 服務變更與系統維護</h2>
+            <ul>
+                <li><strong>條款修改：</strong>本公司保留隨時修改本服務條款的權利，並會透過 HAPPY GO 官方管道進行公告。</li>
+                <li><strong>暫停或中斷：</strong>若遇天災等不可抗力因素，或系統需要進行必要的保養與升級，本公司可能會暫停或中斷服務，敬請見諒。</li>
+            </ul>
+
+            <h2>五、 其他重要事項</h2>
+            <ul>
+                <li>本服務條款之解釋與適用，均以中華民國法令為準據法。</li>
+                <li>若您對本服務有任何疑問，歡迎隨時至 HAPPY GO 官網或 APP 聯繫文字客服（服務時間：週一至週五 9:00~18:00）。</li>
+            </ul>
+        </div>
+    </main>
+
+    <main id="view-points" class="view-container">
+        <div class="doc-content">
+            <h2>一、 點數性質與基本定義</h2>
+            <ul>
+                <li><strong>專屬虛擬積分：</strong>「健康點」為 GO HEALTH 平台發行之專屬活動積分，不具備任何實體現金價值，亦不得要求折換現金、轉讓予他人，或跨帳號合併使用。</li>
+                <li><strong>與 HAPPY GO 點數之差異：</strong>健康點僅限於 GO HEALTH 平台內使用。未來可依本平台公告之特定匯率或活動辦法，兌換為「HAPPY GO 點數」，具體兌換規則依商城實際上線公告為準。</li>
+            </ul>
+
+            <h2>二、 點數獲取與「雙軌帳本」機制</h2>
+            <p>透過完成每日健康任務，您將獲得健康點。本系統採行個人與群組「雙軌獨立計算」機制：</p>
+            <ul>
+                <li><strong>個人帳戶（可用餘額）：</strong>您所獲得的健康點將存入您的個人帳戶中，未來可用於專屬商城兌換商品。</li>
+                <li><strong>群組進度（累積指標）：</strong>當您身處家庭群組時，您每日獲得的點數將「同步計算」至群組總池中（每滿 1,000 點獲得 1 張抽獎券）。</li>
+                <li><strong>互不影響原則：</strong>您在商城花費個人帳戶內的健康點，絕對不會扣除或影響群組的總進度與抽獎資格，請安心使用。</li>
+            </ul>
+
+            <h2>三、 專屬商城兌換規則 (即將上線)</h2>
+            <ul>
+                <li><strong>商城功能：</strong>未來將開放健康點兌換「HAPPY GO 點數」或「實體健康商品」。</li>
+                <li><strong>規則調整權：</strong>具體開放時間、可兌換之商品品項、所需點數及兌換數量上限，本公司保留隨時新增、修改或終止之權利，並將於實際上線時於平台內另行公告。</li>
+            </ul>
+
+            <h2>四、 點數效期與歸零機制</h2>
+            <ul>
+                <li><strong>使用期限：</strong>健康點設有使用期限。當年所獲取之健康點，使用期限至次年 12 月 31 日 23:59 止。</li>
+                <li><strong>逾期失效：</strong>逾期未兌換或未使用完畢之健康點將自動失效歸零，恕不提供展延或任何形式之補償。</li>
+            </ul>
+
+            <h2>五、 違規與防弊處置</h2>
+            <p>若系統偵測或經檢舉發現，使用者透過惡意程式、自動化腳本、虛假帳號或其他違反常理與公平原則之方式獲取健康點，本公司有權逕行扣回不當獲取之點數、取消其兌換或抽獎資格，並視情節終止該帳號之使用權利。</p>
+        </div>
+    </main>
+
+    <main id="view-lottery" class="view-container">
+        <div class="doc-content">
+            <h2>一、 結算時間與抽獎資格</h2>
+            <ul>
+                <li><strong>結算基準：</strong>本系統將於每週日 23:59 進行當週「群組進度」總分結算。</li>
+                <li><strong>抽獎券轉換：</strong>群組進度每滿 1,000 點，即自動轉化為 1 張抽獎券。抽獎券越多，中獎機率越高。</li>
+                <li><strong>資格與名單認定（重要）：</strong>抽獎券之計算與最終中獎名單，均以每週日 23:59 結算當下，存在於該群組內之「現有成員」為準。於結算時間後才加入該群組之成員，不具備當週該群組之中獎與領獎資格。</li>
+            </ul>
+
+            <h2>二、 群組異動與積分「隨人轉移」聲明</h2>
+            <ul>
+                <li><strong>積分隨帳號移轉：</strong>本服務允許您自由進出家庭群組。若您於週日 23:59 結算前退出群組，您個人於當週所累積之任務得分將隨您的帳號全數移出，原群組之總積分將即時扣除。</li>
+                <li><strong>免責聲明：</strong>任何因成員自行退出、誤操作或遭剔除，導致群組總積分減少或喪失抽獎資格之情形，本公司概不負責，亦不提供任何形式之積分恢復或抽獎券補發。</li>
+            </ul>
+
+            <h2>三、 獎項發放與 HAPPY GO 點數規範</h2>
+            <ul>
+                <li><strong>多重獲獎限制：</strong>為鼓勵更多家庭參與，每週每個群組限中獎一次，不重複給獎。</li>
+                <li><strong>獎項派發：</strong>若該群組中獎，結算當下之群組內所有成員皆可獲得指定額度之 HAPPY GO 點數（如：100 點，具體獎項依當週首頁公告為準，獎項將滾動式更新）。</li>
+                <li><strong>點數效期與規範：</strong>本活動發放之 HAPPY GO 點數為實質點數，其使用期限、折抵方式與相關權益，均依 HAPPY GO 官方公告之服務辦法為準。</li>
+            </ul>
+
+            <h2>四、 公平防弊機制</h2>
+            <p>為維護活動公平性，若經系統偵測發現有惡意註冊、利用自動化程式洗點、或於結算日前刻意頻繁切換群組以不當獲取抽獎資格之異常帳號，本公司有權逕行取消該帳號（及所屬群組）之抽獎與領獎資格，並視情節終止其 GO HEALTH 服務使用權。</p>
+        </div>
+    </main>
+
+    <script>
+        // 取得 DOM 元素
+        const btnBack = document.getElementById('btn-back');
+        const headerTitle = document.getElementById('header-title');
+        const views = document.querySelectorAll('.view-container');
+
+        // 切換視圖邏輯
+        function switchView(viewId, title) {
+            // 隱藏所有視圖
+            views.forEach(view => view.classList.remove('active'));
+            
+            // 顯示目標視圖
+            document.getElementById(viewId).classList.add('active');
+            
+            // 更新 Header
+            headerTitle.textContent = title;
+            
+            // 處理返回按鈕顯示邏輯
+            if (viewId === 'view-home') {
+                btnBack.style.display = 'none';
+            } else {
+                btnBack.style.display = 'flex';
+                // 滾動至頂部以確保長輩閱讀體驗
+                window.scrollTo(0, 0); 
+            }
+        }
+
+        // 返回按鈕事件綁定
+        btnBack.addEventListener('click', () => {
+            switchView('view-home', '政策與須知');
+        });
+    </script>
+</body>
+</html>
